@@ -20,6 +20,10 @@ This is a **Vision + Tabular ML + Reasoning system** — a full end-to-end pipel
 ---
 
 ## 🧠 System Architecture
+
+### 🔄 Workflow
+
+
 User uploads image + types claim text
 ↓
 Streamlit Frontend
@@ -27,10 +31,10 @@ Streamlit Frontend
 POST /claim → FastAPI
 ↓
 ┌─────────────────────────────────────┐
-│  yolo_service   → damages detected  │
-│  ocr_service    → plate_valid       │
-│  claim_parser   → damages claimed   │
-│  match_service  → match_score       │
+│ yolo_service → damages detected │
+│ ocr_service → plate_valid │
+│ claim_parser → damages claimed │
+│ match_service → match_score │
 └─────────────────────────────────────┘
 ↓
 fraud_service → XGBoost → fraud_probability
@@ -42,14 +46,50 @@ decision_service → APPROVE / REVIEW / REJECT
 JSON response back to Streamlit
 ↓
 ┌──────────────────────────────────────┐
-│  Annotated image with YOLO boxes     │
-│  Decision badge (colour coded)       │
-│  Fraud probability score             │
-│  SHAP waterfall chart                │
-│  Top 3 plain English reasons         │
+│ Annotated image with YOLO boxes │
+│ Decision badge (colour coded) │
+│ Fraud probability score │
+│ SHAP waterfall chart │
+│ Top 3 plain English reasons │
 └──────────────────────────────────────┘
 
+
 ---
+
+### 🔍 Key Components
+
+- **Frontend (Streamlit)**  
+  Handles image upload and claim text input, and displays results.
+
+- **Backend (FastAPI)**  
+  Manages the `/claim` API and orchestrates the pipeline.
+
+- **Computer Vision Layer**
+  - `yolo_service` → Detects vehicle damages  
+  - `ocr_service` → Extracts and validates license plate  
+
+- **NLP + Matching Layer**
+  - `claim_parser` → Extracts claimed damages  
+  - `match_service` → Compares detected vs claimed damages  
+
+- **Fraud Detection Layer**
+  - `fraud_service` → Predicts fraud probability using XGBoost  
+
+- **Explainability Layer**
+  - `xai_service` → Generates SHAP & LIME explanations  
+
+- **Decision Layer**
+  - `decision_service` → Outputs APPROVE / REVIEW / REJECT  
+
+---
+
+### 📊 Output to User
+
+- Annotated image (YOLO bounding boxes)  
+- Fraud probability score  
+- Decision badge (color-coded)  
+- SHAP explanation chart  
+- Top 3 plain-English reasons  
 
 # 📂 insurance-fraud-ai
 
