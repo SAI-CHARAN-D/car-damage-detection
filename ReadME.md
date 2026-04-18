@@ -51,53 +51,59 @@ JSON response back to Streamlit
 
 ---
 
-## 📂 Project Structure
-insurance-fraud-ai/
-│
-├── data/
-│   ├── processed/              # YOLO formatted images and labels
-│   ├── fraud_dataset.csv       # 2000-row synthetic fraud dataset
-│   ├── vehicle_db.json         # Mock vehicle plate database
-│   └── data.yaml               # YOLO training config
-│
-├── notebooks/
-│   ├── 01_EDA.ipynb            # Exploratory data analysis
-│   ├── 02_model_eval.ipynb     # Model evaluation and metrics
-│   └── 03_xai_analysis.ipynb   # SHAP, LIME, Grad-CAM analysis
-│
-├── training/
-│   ├── train_yolo.py           # YOLOv11 fine-tuning script
-│   ├── train_fraud_model.py    # XGBoost training script
-│   └── generate_synthetic_data.py  # Fraud dataset generator
-│
-├── app/
-│   ├── main.py                 # FastAPI entry point
-│   ├── routes.py               # API endpoints
-│   ├── services/
-│   │   ├── yolo_service.py     # Damage detection
-│   │   ├── ocr_service.py      # Plate extraction and validation
-│   │   ├── claim_parser.py     # Claim text parsing
-│   │   ├── match_service.py    # Detection vs claim matching
-│   │   ├── fraud_service.py    # XGBoost fraud prediction
-│   │   ├── decision_service.py # Threshold decision logic
-│   │   └── xai_service.py      # SHAP and LIME explanations
-│   └── utils/
-│       ├── image_utils.py      # Image processing helpers
-│       └── config.py           # Paths and constants
-│
-├── frontend/
-│   └── app.py                  # Streamlit UI
-│
-├── models/
-│   ├── yolo_damage.pt          # Fine-tuned YOLOv11 weights
-│   └── fraud_xgb.pkl           # Trained XGBoost model
-│
-├── outputs/                    # Per-request generated files
-├── tests/
-├── requirements.txt
-└── README.md
+# 📂 insurance-fraud-ai
 
----
+## 📁 data/
+- `processed/` → YOLO formatted images and labels  
+- `fraud_dataset.csv` → 2000-row synthetic fraud dataset  
+- `vehicle_db.json` → Mock vehicle plate database  
+- `data.yaml` → YOLO training configuration  
+
+## 📁 notebooks/
+- `01_EDA.ipynb` → Exploratory Data Analysis  
+- `02_model_eval.ipynb` → Model evaluation and metrics  
+- `03_xai_analysis.ipynb` → SHAP, LIME, Grad-CAM analysis  
+
+## 📁 training/
+- `train_yolo.py` → YOLOv11 fine-tuning script  
+- `train_fraud_model.py` → XGBoost training script  
+- `generate_synthetic_data.py` → Fraud dataset generator  
+
+## 📁 app/
+- `main.py` → FastAPI entry point  
+- `routes.py` → API endpoints  
+
+### 📁 services/
+- `yolo_service.py` → Damage detection  
+- `ocr_service.py` → Plate extraction and validation  
+- `claim_parser.py` → Claim text parsing  
+- `match_service.py` → Detection vs claim matching  
+- `fraud_service.py` → XGBoost fraud prediction  
+- `decision_service.py` → Threshold decision logic  
+- `xai_service.py` → SHAP and LIME explanations  
+
+### 📁 utils/
+- `image_utils.py` → Image processing helpers  
+- `config.py` → Paths and constants  
+
+## 📁 frontend/
+- `app.py` → Streamlit UI  
+
+## 📁 models/
+- `yolo_damage.pt` → Fine-tuned YOLOv11 weights  
+- `fraud_xgb.pkl` → Trained XGBoost model  
+
+## 📁 outputs/
+- Stores per-request generated files  
+
+## 📁 tests/
+- Unit and integration tests  
+
+## 📄 requirements.txt
+- Project dependencies  
+
+## 📄 README.md
+- Project documentation  
 
 ## 🚀 Getting Started
 
@@ -192,7 +198,7 @@ This system uses three XAI techniques to explain every decision:
 
 - **SHAP** — Waterfall chart showing each feature's contribution to the fraud score
 - **LIME** — Top 3 human-readable reasons for the prediction
-- **Grad-CAM** — Heatmap overlay on the car image showing which region triggered YOLO detection
+
 
 ---
 
